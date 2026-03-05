@@ -35,9 +35,7 @@ class BaseAgent:
     def register_tool(self, name: str, func):
         self.tool_registry[name] = func
 
-    # ------------------------
     # Main agent loop
-    # ------------------------
     def run(self, user_prompt: str):
 
         messages = self.messages
@@ -58,13 +56,13 @@ class BaseAgent:
 
         message = response.choices[0].message
 
-        # If model calls tool
+        # If tool call
         if message.tool_calls:
             tool_call = message.tool_calls[0]
             tool_name = tool_call.function.name
             arguments = json.loads(tool_call.function.arguments or "{}")
 
-            # Execute locally
+            # Execute
             tool_result = self.execute_tool(tool_name, arguments)
 
             # Add tool result back into conversation
