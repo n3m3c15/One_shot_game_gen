@@ -5,10 +5,9 @@ from Agents.game_description_agent import EnquiryAgent
 
 REGISTRY_FILE = "current_game.txt"
 
-# ---------------------------
 # Helper: Read Current Game
-# ---------------------------
-
+# Post generation game_generation_agent adds the entry point path into current_game.txt
+# TODO: improve game rendering condition...ideally by using a backend you lazy bum
 def get_current_game_dir():
     if os.path.exists(REGISTRY_FILE):
         with open(REGISTRY_FILE, "r") as f:
@@ -16,9 +15,7 @@ def get_current_game_dir():
     return None
 
 
-# ---------------------------
-# Session Initialization
-# ---------------------------
+# Initialize Session 
 
 if "agent" not in st.session_state:
     st.session_state.agent = EnquiryAgent()
@@ -26,32 +23,27 @@ if "agent" not in st.session_state:
 if "messages" not in st.session_state:
     st.session_state.messages = [
         m for m in st.session_state.agent.messages if m["role"] != "system"
-    ]
+    ] ### avoid displaying system_prompt + skill.md in history
 
 agent = st.session_state.agent
 messages = st.session_state.messages
 
 st.title("🎮 Game Description Agent")
 
-# ---------------------------
 # Display Chat History
-# ---------------------------
+
 
 for msg in messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
-# ---------------------------
-# User Input
-# ---------------------------
+# Handle User Input
 
 user_input = st.chat_input("Type your message...")
 
 if user_input:
 
-    # ---------------------------
-    # RESET LOGIC
-    # ---------------------------
+    # Quiting Logic
 
     if user_input.lower() in ["/quit", "/q"]:
 
@@ -72,10 +64,7 @@ if user_input:
 
     messages.append({"role": "user", "content": user_input})
 
-    # ---------------------------
     # Call Agent
-    # ---------------------------
-
     with st.chat_message("assistant"):
         with st.spinner("Agent thinking..."):
             response = agent(user_prompt=user_input)
@@ -85,10 +74,8 @@ if user_input:
 
     st.rerun()
 
-# ---------------------------
-# Render Generated Game
-# ---------------------------
-
+# Render Generated Game in iframe
+#TODO: This seems to be buggy af make a backend and fix it for the love of all thats holy
 st.divider()
 st.header("🕹️ Play Generated Game")
 
@@ -107,7 +94,9 @@ if game_dir:
 
         components.html(game_html, height=750, scrolling=False)
 
-        # Download option
+        # Download button
+        # TODO: IDEK if this works I forgot to test it post dockerizing now it's 2am and I can't bother no more
+        # get into software they said, it'll be fun they said T_T
         with open(game_path, "r", encoding="utf-8") as f:
             st.download_button(
                 label="📥 Download Game",
