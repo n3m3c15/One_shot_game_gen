@@ -117,15 +117,21 @@ Answer Follow-up Questions Patiently & verify game details
 ```
   generated_game_{timestamp}/game_details.txt
 ```
-Verify & Ask agent to proceed(Be kind to the agent)
+Verify, & Ask agent to proceed (say please)
 ```
   generated_game_{timestamp}/plan.md
 ```
-Verify & respectfully ask the agent to proceed
+Verify & respectfully ask the agent to proceed  
 Generated output:
 
 ```
   generated_game_{timestamp}/index.html
+```
+The game will be rendered in streamlit iframe for testing and download  
+Thank The AI For its efforts :P  
+End chat  
+```
+   /quit or /q
 ```
 
 ---
