@@ -5,9 +5,9 @@ class PlanningAgent(BaseAgent):
     def __init__(self):
         system_prompt = None
         skills = None
-        with open('D:/codes/game gen/Agents/prompts/planning_agent_prompt.txt', 'r', encoding='utf-8') as f:
+        with open('Agents/prompts/planning_agent_prompt.txt', 'r', encoding='utf-8') as f:
             system_prompt = f.read()
-        with open("D:/codes/game gen/Agents/skills/planning_skills.md", 'r', encoding='utf-8') as f:
+        with open("Agents/skills/planning_skills.md", 'r', encoding='utf-8') as f:
             skills = f.read()
         super().__init__(system_prompt, skills=skills)
         

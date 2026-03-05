@@ -5,9 +5,9 @@ class GameGenAgent(BaseAgent):
     def __init__(self):
         system_prompt = None
         skills = None
-        with open("D:/codes/game gen/Agents/prompts/game_gen_prompt.txt", 'r', encoding='utf-8') as f:
+        with open("Agents/prompts/game_gen_prompt.txt", 'r', encoding='utf-8') as f:
             system_prompt = f.read()
-        with open("D:/codes/game gen/Agents/skills/game_script_gen_skill.md", 'r', encoding='utf-8') as f:
+        with open("Agents/skills/game_script_gen_skill.md", 'r', encoding='utf-8') as f:
             skills = f.read()
         super().__init__(system_prompt, skills=skills)
     

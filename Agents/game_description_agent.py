@@ -71,9 +71,9 @@ class EnquiryAgent(BaseAgent):
         ]
         system_prompt = None
         skills = None
-        with open('D:/codes/game gen/Agents/prompts/enquiry_agent_prompt.txt', 'r', encoding='utf-8') as f:
+        with open('Agents/prompts/enquiry_agent_prompt.txt', 'r', encoding='utf-8') as f:
             system_prompt = f.read()
-        with open("D:/codes/game gen/Agents/skills/requirements_gathering_skill.md", 'r', encoding='utf-8') as f:
+        with open("Agents/skills/requirements_gathering_skill.md", 'r', encoding='utf-8') as f:
             skills = f.read()
         super().__init__(system_prompt, skills=skills, tools=self.tools)
         
